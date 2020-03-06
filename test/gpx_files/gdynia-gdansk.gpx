@@ -17,7 +17,7 @@
      </gpxtpx:TrackPointExtension>
     </extensions>
    </trkpt>
-   <trkpt lat="54.5198540" lon="18.5397300">
+   <!-- <trkpt lat="54.5198540" lon="18.5397300">
     <ele>10.2</ele>
     <time>2020-02-02T10:37:14Z</time>
     <extensions>
@@ -36,8 +36,8 @@
       <gpxtpx:hr>103</gpxtpx:hr>
      </gpxtpx:TrackPointExtension>
     </extensions>
-   </trkpt>
-   <trkpt lat="54.5198530" lon="18.5398130">
+   </trkpt> -->
+   <!-- <trkpt lat="54.5198530" lon="18.5398130">
     <ele>10.0</ele>
     <time>2020-02-02T10:37:16Z</time>
     <extensions>
@@ -39946,7 +39946,7 @@
       <gpxtpx:hr>131</gpxtpx:hr>
      </gpxtpx:TrackPointExtension>
     </extensions>
-   </trkpt>
+   </trkpt> -->
   </trkseg>
  </trk>
 </gpx>

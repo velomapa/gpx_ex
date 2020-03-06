@@ -1,32 +1,32 @@
 defmodule GpxEx do
-  @moduledoc """
-  Documentation for `GpxEx`.
-  """
-
   import SweetXml
 
-  def parse_tracks(gpx_document) do
+  def parse(gpx_document) do
     tracks =
       gpx_document
-      |> get_tracks()
-      |> Enum.map(fn track ->
-        track
-        |> get_segments()
-        |> Enum.map(fn segment ->
-          segment
-          |> get_points()
-          |> Enum.map(&build_trackpoint/1)
-          |> build_segment()
-        end)
-        |> Enum.map(&build_track/1)
-      end)
+      |> get_track_elements()
+      |> Enum.map(&build_track/1)
 
-    build_gpx(tracks)
+      %GpxEx.Gpx{tracks: tracks}
   end
 
-  def build_gpx(tracks), do: %GpxEx.Gpx{tracks: tracks}
-  def build_track(segments), do: %GpxEx.Track{segments: segments}
-  def build_segment(points), do: %GpxEx.TrackSegment{points: points}
+  defp build_track(track_xml_element) do
+    segments =
+      track_xml_element
+      |> get_segment_elements()
+      |> Enum.map(&build_segment/1)
+
+    %GpxEx.Track{segments: segments}
+  end
+
+  defp build_segment(segment_xml_element) do
+    points =
+      segment_xml_element
+      |> get_point_elements()
+      |> Enum.map(&build_trackpoint/1)
+
+    %GpxEx.TrackSegment{points: points}
+  end
 
   defp build_trackpoint(point_element) do
     %GpxEx.TrackPoint{
@@ -37,11 +37,12 @@ defmodule GpxEx do
     }
   end
 
-  defp get_tracks(gpx_document), do: xpath(gpx_document, ~x"//trk"l)
-  defp get_segments(xml_element), do: xpath(xml_element, ~x"./trkseg"l)
-  defp get_points(xml_element), do: xpath(xml_element, ~x"./trkpt"l)
-  defp get_lat(point_element), do: xpath(point_element, ~x"./@lat"f)
-  defp get_lon(point_element), do: xpath(point_element, ~x"./@lon"f)
-  defp get_ele(point_element), do: xpath(point_element, ~x"./ele/text()")
-  defp get_time(point_element), do: xpath(point_element, ~x"./time/text()")
+  defp get_track_elements(xml), do: xpath(xml, ~x"//trk"l)
+  defp get_segment_elements(xml), do: xpath(xml, ~x"./trkseg"l)
+  defp get_point_elements(xml), do: xpath(xml, ~x"./trkpt"l)
+
+  defp get_lat(xml), do: xpath(xml, ~x"./@lat"f)
+  defp get_lon(xml), do: xpath(xml, ~x"./@lon"f)
+  defp get_ele(xml), do: xpath(xml, ~x"./ele/text()")
+  defp get_time(xml), do: xpath(xml, ~x"./time/text()")
 end

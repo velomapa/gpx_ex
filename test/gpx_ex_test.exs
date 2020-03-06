@@ -3,10 +3,10 @@ defmodule GpxExTest do
   doctest GpxEx
 
   test "fooling around" do
-    {:ok, gpx_doc} = File.read("./test/gpx_files/gdynia-gdansk.gpx")
+    {:ok, gpx_doc} = File.read("./test/gpx_files/gdynia.gpx")
 
     gpx_doc
-    |> GpxEx.parse_tracks()
+    |> GpxEx.parse()
     |> IO.inspect()
   end
 end

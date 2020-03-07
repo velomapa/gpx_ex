@@ -15,6 +15,7 @@ iex(2)> GpxEx.parse(gpx_doc)
 %GpxEx.Gpx{
   tracks: [
     %GpxEx.Track{
+      name: "Track's name",
       segments: [
         %GpxEx.TrackSegment{
           points: [
@@ -37,7 +38,3 @@ iex(2)> GpxEx.parse(gpx_doc)
   ]
 }
 ```
-
-## TODO
-
-[] get track's name

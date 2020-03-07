@@ -16,7 +16,9 @@ defmodule GpxEx.Parser do
       |> get_segment_elements()
       |> Enum.map(&build_segment/1)
 
-    %GpxEx.Track{segments: segments}
+    track_name =get_track_name(track_xml_element)
+
+    %GpxEx.Track{segments: segments, name: track_name}
   end
 
   defp build_segment(segment_xml_element) do
@@ -40,6 +42,8 @@ defmodule GpxEx.Parser do
   defp get_track_elements(xml), do: xpath(xml, ~x"//trk"l)
   defp get_segment_elements(xml), do: xpath(xml, ~x"./trkseg"l)
   defp get_point_elements(xml), do: xpath(xml, ~x"./trkpt"l)
+
+  defp get_track_name(xml), do: xpath(xml, ~x"./name/text()"s)
 
   defp get_lat(xml), do: xpath(xml, ~x"./@lat"f)
   defp get_lon(xml), do: xpath(xml, ~x"./@lon"f)

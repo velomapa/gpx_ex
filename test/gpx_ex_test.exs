@@ -8,6 +8,7 @@ defmodule GpxExTest do
     expected = %GpxEx.Gpx{
       tracks: [
         %GpxEx.Track{
+          name: "Gdynia",
           segments: [
             %GpxEx.TrackSegment{
               points: [

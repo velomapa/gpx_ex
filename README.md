@@ -10,7 +10,8 @@ Small Elixir library for parsing GPX files. GPX schema definition: https://www.t
 
 ```elixir
 iex(1)> {:ok, gpx_doc} = File.read("./my_track.gpx")
-iex(2)> GpxEx.parse(gpx_doc)
+iex(2)> {:ok, gpx} = GpxEx.parse(gpx_doc)
+iex(3)> gpx
 
 %GpxEx.Gpx{
   tracks: [

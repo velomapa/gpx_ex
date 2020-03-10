@@ -43,6 +43,6 @@ defmodule GpxExTest do
       ]
     }
 
-    assert expected == GpxEx.parse(gpx_doc)
+    assert {:ok, expected} == GpxEx.parse(gpx_doc)
   end
 end

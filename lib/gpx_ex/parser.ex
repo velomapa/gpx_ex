@@ -7,7 +7,7 @@ defmodule GpxEx.Parser do
       |> get_track_elements()
       |> Enum.map(&build_track/1)
 
-      %GpxEx.Gpx{tracks: tracks}
+    {:ok, %GpxEx.Gpx{tracks: tracks}}
   end
 
   defp build_track(track_xml_element) do
@@ -16,7 +16,7 @@ defmodule GpxEx.Parser do
       |> get_segment_elements()
       |> Enum.map(&build_segment/1)
 
-    track_name =get_track_name(track_xml_element)
+    track_name = get_track_name(track_xml_element)
 
     %GpxEx.Track{segments: segments, name: track_name}
   end

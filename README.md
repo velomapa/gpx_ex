@@ -6,6 +6,14 @@ Small Elixir library for parsing GPX files. GPX schema definition: https://www.t
 
 **NOT ON HEX YET.**
 
+Add to deps inside your mix.exs
+
+```elixir
+defp deps do
+  {:gpx_ex, git: "git@github.com:caspg/gpx_ex.git", tag: "0.1.0"}
+end
+```
+
 ## Usage
 
 ```elixir

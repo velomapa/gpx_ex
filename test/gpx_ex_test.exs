@@ -2,7 +2,7 @@ defmodule GpxExTest do
   use ExUnit.Case
   doctest GpxEx
 
-  test "fooling around" do
+  test "parser" do
     {:ok, gpx_doc} = File.read("./test/gpx_files/gdynia.gpx")
 
     expected = %GpxEx.Gpx{
@@ -31,10 +31,10 @@ defmodule GpxExTest do
                   time: "2020-02-02T10:37:15Z"
                 },
                 %GpxEx.TrackPoint{
-                  ele: 10.0,
+                  ele: nil,
                   lat: 54.519853,
                   lon: 18.539813,
-                  time: "2020-02-02T10:37:16Z"
+                  time: nil
                 }
               ]
             }

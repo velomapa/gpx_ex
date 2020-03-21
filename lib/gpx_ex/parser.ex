@@ -43,10 +43,13 @@ defmodule GpxEx.Parser do
   defp get_segment_elements(xml), do: xpath(xml, ~x"./trkseg"l)
   defp get_point_elements(xml), do: xpath(xml, ~x"./trkpt"l)
 
-  defp get_track_name(xml), do: xpath(xml, ~x"./name/text()"s)
+  defp get_track_name(xml), do: xpath(xml, ~x"./name/text()"s) |> optinal_string
 
   defp get_lat(xml), do: xpath(xml, ~x"./@lat"f)
   defp get_lon(xml), do: xpath(xml, ~x"./@lon"f)
-  defp get_ele(xml), do: xpath(xml, ~x"./ele/text()"f)
-  defp get_time(xml), do: xpath(xml, ~x"./time/text()"s)
+  defp get_ele(xml), do: xpath(xml, ~x"./ele/text()"Fo)
+  defp get_time(xml), do: xpath(xml, ~x"./time/text()"s) |> optinal_string
+
+  defp optinal_string(maybe_string) when maybe_string == "",  do: nil
+  defp optinal_string(maybe_string),  do: maybe_string
 end

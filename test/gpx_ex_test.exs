@@ -83,4 +83,24 @@ defmodule GpxExTest do
 
     assert {:ok, expected} == GpxEx.parse(gpx_doc)
   end
+
+  test "parses routes" do
+    {:ok, gpx_doc} = File.read("./test/gpx_files/route.gpx")
+
+    expected = %GpxEx.Gpx{
+      routes: [
+        %GpxEx.Route{
+          name: "Sample route",
+          points: [
+            %GpxEx.Waypoint{name: "Point 1", lon: -94.5, lat: 39.2, ele_m: 388.1},
+            %GpxEx.Waypoint{name: "Point 2", lon: 120.4, lat: -19.9},
+            %GpxEx.Waypoint{name: "Point 3", lon: -0.1, lat: -0.2},
+            %GpxEx.Waypoint{name: "Point 4", lon: 0.2, lat: 0.4, ele_m: -0.1}
+          ]
+        }
+      ]
+    }
+
+    assert {:ok, expected} == GpxEx.parse(gpx_doc)
+  end
 end

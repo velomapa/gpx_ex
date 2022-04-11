@@ -12,7 +12,12 @@ defmodule GpxEx.Parser do
       |> get_top_level_waypoint_elements()
       |> Enum.map(&build_waypoint/1)
 
-    {:ok, %GpxEx.Gpx{tracks: tracks, waypoints: standalone_waypoints}}
+    routes =
+      gpx_document
+      |> get_route_elements()
+      |> Enum.map(&build_route/1)
+
+    {:ok, %GpxEx.Gpx{tracks: tracks, waypoints: standalone_waypoints, routes: routes}}
   end
 
   defp build_track(track_xml_element) do
@@ -44,6 +49,16 @@ defmodule GpxEx.Parser do
     }
   end
 
+  defp build_route(route_element) do
+    %GpxEx.Route{
+      name: get_optional_text(route_element, "name"),
+      points:
+        route_element
+        |> get_route_point_elements()
+        |> Enum.map(&build_waypoint/1)
+    }
+  end
+
   defp build_waypoint(waypoint_element) do
     %GpxEx.Waypoint{
       lat: get_lat(waypoint_element),
@@ -61,6 +76,9 @@ defmodule GpxEx.Parser do
   defp get_point_elements(xml), do: xpath(xml, ~x"./trkpt"l)
 
   defp get_top_level_waypoint_elements(xml), do: xpath(xml, ~x"//wpt"l)
+
+  defp get_route_elements(xml), do: xpath(xml, ~x"//rte"l)
+  defp get_route_point_elements(xml), do: xpath(xml, ~x"./rtept"l)
 
   defp get_lat(xml), do: xpath(xml, ~x"./@lat"f)
   defp get_lon(xml), do: xpath(xml, ~x"./@lon"f)

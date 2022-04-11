@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:gpx="http://www.topografix.com/GPX/1/0" version="1.0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+  <wpt lat="39.2" lon="-94.5">
+    <name>Kansas City, MO</name>
+    <sym>City</sym>
+    <desc>Midwestern city</desc>
+    <url>https://www.visitkc.com</url>
+    <ele>308.15</ele>
+  </wpt>
+  <wpt lat="32.7" lon="-117.2">
+    <sym>City</sym>
+    <name>San Diego, CA</name>
+    <url>https://www.sandiego.gov/</url>
+    <desc>Port city</desc>
+  </wpt>
+  <wpt lat="36.4" lon="-94.2">
+    <ele>395</ele>
+    <url>http://bentonvillear.com/</url>
+    <name>Bentonville, AR</name>
+    <sym>Town</sym>
+  </wpt>
+</gpx>

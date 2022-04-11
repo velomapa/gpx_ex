@@ -2,7 +2,7 @@ defmodule GpxExTest do
   use ExUnit.Case
   doctest GpxEx
 
-  test "parser" do
+  test "parses a track" do
     {:ok, gpx_doc} = File.read("./test/gpx_files/gdynia.gpx")
 
     expected = %GpxEx.Gpx{
@@ -39,6 +39,44 @@ defmodule GpxExTest do
               ]
             }
           ]
+        }
+      ]
+    }
+
+    assert {:ok, expected} == GpxEx.parse(gpx_doc)
+  end
+
+  test "parses standalone waypoints" do
+    {:ok, gpx_doc} = File.read("./test/gpx_files/standalone_wpts.gpx")
+
+    expected = %GpxEx.Gpx{
+      waypoints: [
+        %GpxEx.Waypoint{
+          lat: 39.2,
+          lon: -94.5,
+          name: "Kansas City, MO",
+          symbol: "City",
+          description: "Midwestern city",
+          url: "https://www.visitkc.com",
+          ele_m: 308.15
+        },
+        %GpxEx.Waypoint{
+          lat: 32.7,
+          lon: -117.2,
+          name: "San Diego, CA",
+          symbol: "City",
+          description: "Port city",
+          url: "https://www.sandiego.gov/",
+          ele_m: nil
+        },
+        %GpxEx.Waypoint{
+          lat: 36.4,
+          lon: -94.2,
+          name: "Bentonville, AR",
+          symbol: "Town",
+          description: nil,
+          url: "http://bentonvillear.com/",
+          ele_m: 395
         }
       ]
     }

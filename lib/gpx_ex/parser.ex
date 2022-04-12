@@ -51,7 +51,7 @@ defmodule GpxEx.Parser do
 
   defp build_route(route_element) do
     %GpxEx.Route{
-      name: get_optional_text(route_element, "name"),
+      name: optional_string(route_element, "name"),
       points:
         route_element
         |> get_route_point_elements()

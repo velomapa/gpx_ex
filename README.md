@@ -47,3 +47,7 @@ iex(3)> gpx
   ]
 }
 ```
+
+## License
+
+The project is available as open source under the terms of the [MIT License](https://github.com/velomapa/gpx_ex/blob/master/LICENSE.md).

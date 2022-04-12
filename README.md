@@ -2,6 +2,10 @@
 
 Small Elixir library for parsing GPX files. GPX schema definition: https://www.topografix.com/GPX/1/1
 
+## Roadmap
+
+There is no Roadmap yet. Any PR is welcome. The only requirement is that it should follow GPX schema definition.
+
 ## Installation
 
 **NOT ON HEX YET.**

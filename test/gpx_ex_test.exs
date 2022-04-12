@@ -58,7 +58,7 @@ defmodule GpxExTest do
           symbol: "City",
           description: "Midwestern city",
           url: "https://www.visitkc.com",
-          ele_m: 308.15
+          ele: 308.15
         },
         %GpxEx.Waypoint{
           lat: 32.7,
@@ -67,7 +67,7 @@ defmodule GpxExTest do
           symbol: "City",
           description: "Port city",
           url: "https://www.sandiego.gov/",
-          ele_m: nil
+          ele: nil
         },
         %GpxEx.Waypoint{
           lat: 36.4,
@@ -76,7 +76,7 @@ defmodule GpxExTest do
           symbol: "Town",
           description: nil,
           url: "http://bentonvillear.com/",
-          ele_m: 395
+          ele: 395
         }
       ]
     }
@@ -92,10 +92,10 @@ defmodule GpxExTest do
         %GpxEx.Route{
           name: "Sample route",
           points: [
-            %GpxEx.Waypoint{name: "Point 1", lon: -94.5, lat: 39.2, ele_m: 388.1},
+            %GpxEx.Waypoint{name: "Point 1", lon: -94.5, lat: 39.2, ele: 388.1},
             %GpxEx.Waypoint{name: "Point 2", lon: 120.4, lat: -19.9},
             %GpxEx.Waypoint{name: "Point 3", lon: -0.1, lat: -0.2},
-            %GpxEx.Waypoint{name: "Point 4", lon: 0.2, lat: 0.4, ele_m: -0.1}
+            %GpxEx.Waypoint{name: "Point 4", lon: 0.2, lat: 0.4, ele: -0.1}
           ]
         }
       ]

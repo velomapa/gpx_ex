@@ -63,7 +63,7 @@ defmodule GpxEx.Parser do
     %GpxEx.Waypoint{
       lat: get_lat(waypoint_element),
       lon: get_lon(waypoint_element),
-      ele_m: get_ele(waypoint_element),
+      ele: get_ele(waypoint_element),
       name: optional_string(waypoint_element, "name"),
       symbol: optional_string(waypoint_element, "sym"),
       description: optional_string(waypoint_element, "desc"),

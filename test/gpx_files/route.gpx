@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:gpx="http://www.topografix.com/GPX/1/0" version="1.0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+  <rte>
+    <name><![CDATA[Sample route]]></name>
+    <desc>Fake route</desc>
+    <rtept lat="39.2" lon="-94.5">
+      <ele>388.1</ele>
+      <name>Point 1</name>
+    </rtept>
+    <rtept lat="-19.9" lon="120.4">
+      <name>Point 2</name>
+    </rtept>
+    <rtept lat="-0.2" lon="-0.1">
+      <name>Point 3</name>
+    </rtept>
+    <rtept lat="0.4" lon="0.2">
+      <name>Point 4</name>
+      <ele>-0.1</ele>
+    </rtept>
+  </rte>
+</gpx>

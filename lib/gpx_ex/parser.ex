@@ -7,7 +7,17 @@ defmodule GpxEx.Parser do
       |> get_track_elements()
       |> Enum.map(&build_track/1)
 
-    {:ok, %GpxEx.Gpx{tracks: tracks}}
+    standalone_waypoints =
+      gpx_document
+      |> get_top_level_waypoint_elements()
+      |> Enum.map(&build_waypoint/1)
+
+    routes =
+      gpx_document
+      |> get_route_elements()
+      |> Enum.map(&build_route/1)
+
+    {:ok, %GpxEx.Gpx{tracks: tracks, waypoints: standalone_waypoints, routes: routes}}
   end
 
   defp build_track(track_xml_element) do
@@ -16,7 +26,7 @@ defmodule GpxEx.Parser do
       |> get_segment_elements()
       |> Enum.map(&build_segment/1)
 
-    track_name = get_track_name(track_xml_element)
+    track_name = optional_string(track_xml_element, "name")
 
     %GpxEx.Track{segments: segments, name: track_name}
   end
@@ -39,17 +49,57 @@ defmodule GpxEx.Parser do
     }
   end
 
+  defp build_route(route_element) do
+    %GpxEx.Route{
+      name: optional_string(route_element, "name"),
+      points:
+        route_element
+        |> get_route_point_elements()
+        |> Enum.map(&build_waypoint/1)
+    }
+  end
+
+  defp build_waypoint(waypoint_element) do
+    %GpxEx.Waypoint{
+      lat: get_lat(waypoint_element),
+      lon: get_lon(waypoint_element),
+      ele: get_ele(waypoint_element),
+      name: optional_string(waypoint_element, "name"),
+      symbol: optional_string(waypoint_element, "sym"),
+      description: optional_string(waypoint_element, "desc"),
+      url: optional_string(waypoint_element, "url")
+    }
+  end
+
   defp get_track_elements(xml), do: xpath(xml, ~x"//trk"l)
   defp get_segment_elements(xml), do: xpath(xml, ~x"./trkseg"l)
   defp get_point_elements(xml), do: xpath(xml, ~x"./trkpt"l)
 
-  defp get_track_name(xml), do: xpath(xml, ~x"./name/text()"s) |> optinal_string
+  defp get_top_level_waypoint_elements(xml), do: xpath(xml, ~x"//wpt"l)
+
+  defp get_route_elements(xml), do: xpath(xml, ~x"//rte"l)
+  defp get_route_point_elements(xml), do: xpath(xml, ~x"./rtept"l)
 
   defp get_lat(xml), do: xpath(xml, ~x"./@lat"f)
   defp get_lon(xml), do: xpath(xml, ~x"./@lon"f)
-  defp get_ele(xml), do: xpath(xml, ~x"./ele/text()"Fo)
-  defp get_time(xml), do: xpath(xml, ~x"./time/text()"s) |> optinal_string
+  defp get_ele(xml), do: optional_xpath(xml, ~x"./ele/text()"f)
+  defp get_time(xml), do: optional_string(xml, "time")
 
-  defp optinal_string(maybe_string) when maybe_string == "",  do: nil
-  defp optinal_string(maybe_string),  do: maybe_string
+  defp optional_string(xml, element_type) do
+    el = xpath(xml, ~x"./#{element_type}")
+
+    if is_nil(el) do
+      nil
+    else
+      xpath(el, ~x"./text()"s)
+    end
+  end
+
+  defp optional_xpath(xml, path) do
+    try do
+      xpath(xml, path)
+    catch
+      _, _ -> nil
+    end
+  end
 end

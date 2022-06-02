@@ -2,22 +2,27 @@ defmodule GpxEx.Parser do
   import SweetXml
 
   def parse(gpx_document) do
-    tracks =
-      gpx_document
-      |> get_track_elements()
-      |> Enum.map(&build_track/1)
+    try do
+      tracks =
+        gpx_document
+        |> get_track_elements()
+        |> Enum.map(&build_track/1)
 
-    standalone_waypoints =
-      gpx_document
-      |> get_top_level_waypoint_elements()
-      |> Enum.map(&build_waypoint/1)
+      standalone_waypoints =
+        gpx_document
+        |> get_top_level_waypoint_elements()
+        |> Enum.map(&build_waypoint/1)
 
-    routes =
-      gpx_document
-      |> get_route_elements()
-      |> Enum.map(&build_route/1)
+      routes =
+        gpx_document
+        |> get_route_elements()
+        |> Enum.map(&build_route/1)
 
-    {:ok, %GpxEx.Gpx{tracks: tracks, waypoints: standalone_waypoints, routes: routes}}
+      {:ok, %GpxEx.Gpx{tracks: tracks, waypoints: standalone_waypoints, routes: routes}}
+    catch
+      _kind, {:fatal, {xmerl_error, _, _, _}} -> {:error, xmerl_error}
+      _kind, error -> {:error, error}
+    end
   end
 
   defp build_track(track_xml_element) do

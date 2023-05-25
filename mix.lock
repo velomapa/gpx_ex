@@ -1,3 +1,4 @@
 %{
+  "math": {:hex, :math, "0.7.0", "12af548c3892abf939a2e242216c3e7cbfb65b9b2fe0d872d05c6fb609f8127b", [:mix], [], "hexpm", "7987af97a0c6b58ad9db43eb5252a49fc1dfe1f6d98f17da9282e297f594ebc2"},
   "sweet_xml": {:hex, :sweet_xml, "0.7.3", "debb256781c75ff6a8c5cbf7981146312b66f044a2898f453709a53e5031b45b", [:mix], [], "hexpm", "e110c867a1b3fe74bfc7dd9893aa851f0eed5518d0d7cad76d7baafd30e4f5ba"},
 }

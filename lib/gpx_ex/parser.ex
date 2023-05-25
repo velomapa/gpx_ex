@@ -42,7 +42,8 @@ defmodule GpxEx.Parser do
       |> get_point_elements()
       |> Enum.map(&build_trackpoint/1)
 
-    %GpxEx.TrackSegment{points: points}
+    length = GpxEx.TrackSegment.calc_length(points)
+    %GpxEx.TrackSegment{points: points, length: length}
   end
 
   defp build_trackpoint(point_element) do

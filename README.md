@@ -14,7 +14,7 @@ Add to deps inside your mix.exs
 
 ```elixir
 defp deps do
-  {:gpx_ex, git: "git@github.com:caspg/gpx_ex.git", tag: "0.5.0"}
+  {:gpx_ex, github: "caspg/gpx_ex", tag: "0.5.0"},
 end
 ```
 
